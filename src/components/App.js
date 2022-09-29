@@ -11,14 +11,16 @@ const options = [
 
 const App = () => {
   const [currentPlan, setCurrentPlan] = useState();
+  // const [selectedPlanInfo, setSelectedPlanInfo] = useState(undefined);
 
   const changeHandler = (e) => {
-
+    const selectedId = parseInt(e.target.value);
+    const selectedPlan = options.find((opt) => opt.key === selectedId);
+    // setSelectedPlanInfo(selectedPlan);
+    setCurrentPlan(selectedPlan);
   };
 
-  const submitHandler = (e) => {
-    
-  };
+  const submitHandler = (e) => {};
 
   return (
     <div id="main">
@@ -37,7 +39,7 @@ const App = () => {
             any device anywhere you like.
           </p>
         </div>
-        <form onSubmit={}>
+        <form onSubmit={submitHandler}>
           <div className="select-container">
             <div className="music-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">
@@ -52,8 +54,8 @@ const App = () => {
               </svg>
             </div>
             <div className="plan">
-              <h4 id="plan-title"></h4>
-              <p id="plan-price"></p>
+              <h4 id="plan-title">{currentPlan?.plan}</h4>
+              <p id="plan-price">{currentPlan?.price}</p>
             </div>
             <select onChange={changeHandler} className="select" id="select">
               <option disabled selected>
@@ -61,7 +63,7 @@ const App = () => {
               </option>
               {options.map((option) => (
                 <option key={option.key} value={option.key}>
-                 
+                  {option.plan}
                 </option>
               ))}
             </select>
